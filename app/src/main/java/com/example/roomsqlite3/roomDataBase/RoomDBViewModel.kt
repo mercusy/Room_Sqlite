@@ -22,7 +22,7 @@ class RoomDBViewModel(application: Application) : AndroidViewModel(application) 
                 val usersFromDb = dbHelper.getData()
                 liveData.value = LiveData.AllData(usersFromDb)
 
-            } catch (e: Exception) {}
+            } catch (_: Exception) {}
         }
     }
     fun addUser(user: Data){
