@@ -38,7 +38,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             when(it){
                 is LiveData.AllData ->{
                     it.dataFromDb
-                    binding.recycler.adapter = CardAdapter(it.dataFromDb,::delete)
+                    binding.recycler.adapter = CardAdapter(it.dataFromDb,::delete,::update)
                 }
                 is LiveData.Nothing ->{}
                 else -> {}
@@ -49,6 +49,10 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     private fun delete(data: Data){
        viewModel.delete(data)
     }
+    private fun update(data: Data){
+        viewModel.update(data)
+    }
+
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.options_menu,menu)

@@ -40,4 +40,10 @@ class RoomDBViewModel(application: Application) : AndroidViewModel(application) 
             fetchUsers()
         }
     }
+    fun update(data: Data){
+        liveData.value = LiveData.Nothing
+        viewModelScope.launch {
+            dbHelper.update(data)
+        }
+    }
 }

@@ -129,7 +129,6 @@
                 android:backgroundTint="@color/C6" />
 
             <TextView
-                android:visibility="gone"
                 android:id="@+id/C7"
                 android:layout_width="30dp"
                 android:layout_height="30dp"

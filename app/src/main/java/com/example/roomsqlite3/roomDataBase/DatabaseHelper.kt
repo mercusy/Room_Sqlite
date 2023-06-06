@@ -7,4 +7,6 @@ interface DatabaseHelper {
 
     suspend fun delete(data: Data)
 
+    suspend fun update(data: Data)
+
 }
