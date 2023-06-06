@@ -38,13 +38,18 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             when(it){
                 is LiveData.AllData ->{
                     it.dataFromDb
+                    if (it.dataFromDb.isEmpty()){
+                        binding.addFrag.visibility = View.VISIBLE
+                    }else{
+                        setRecyclerViewScrollListener()
+                        binding.addFrag.visibility = View.GONE
+                    }
                     binding.recycler.adapter = CardAdapter(it.dataFromDb,::delete,::update)
                 }
                 is LiveData.Nothing ->{}
                 else -> {}
             }
         }
-        setRecyclerViewScrollListener()
     }
     private fun delete(data: Data){
        viewModel.delete(data)
