@@ -6,6 +6,7 @@ import androidx.room.PrimaryKey
 @Entity
 data class Data (
     @PrimaryKey val id: Int,
-    val name: String,
-    val lastname: String,
+    val title: String,
+    val message: String,
+    val color: Int
 )

@@ -15,4 +15,5 @@ interface DAO {
 
     @Delete
     suspend fun delete(data: Data)
+
 }
