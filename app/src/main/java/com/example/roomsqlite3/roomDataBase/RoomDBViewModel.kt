@@ -11,7 +11,6 @@ sealed interface LiveData{
     object Nothing : LiveData
 }
 
-
 class RoomDBViewModel(application: Application) : AndroidViewModel(application) {
     private val dbHelper = DatabaseHelperImpl(DataBaseBuilder.getInstance(getApplication()))
 
