@@ -9,4 +9,5 @@
     <string name="message">message</string>
     <string name="messageadd">Message</string>
     <string name="titleadd">Title</string>
+    <string name="notes">Notes</string>
 </resources>

@@ -6,6 +6,7 @@ import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -32,9 +33,17 @@ open class MainFragment : Fragment(R.layout.fragment_main) {
             findNavController().navigate(R.id.action_mainFragment_to_addFragment)
             childFragmentManager.popBackStack()
         }
-        setHasOptionsMenu(true)
         viewModel.fetchUsers()
         binding.toolbar.inflateMenu(R.menu.options_menu)
+        binding.toolbar.setOnMenuItemClickListener {
+            when(it.itemId){
+                R.id.settings ->{
+                    findNavController().navigate(R.id.action_mainFragment_to_settings2)
+                }
+            }
+            return@setOnMenuItemClickListener true
+        }
+
         binding.recycler.layoutManager = LinearLayoutManager(requireContext())
 
         viewModel.liveData.observe(viewLifecycleOwner){
@@ -45,7 +54,6 @@ open class MainFragment : Fragment(R.layout.fragment_main) {
                         binding.addFrag.visibility = View.VISIBLE
                     }else{
                         setRecyclerViewScrollListener()
-                        binding.addFrag.visibility = View.GONE
                     }
                     binding.recycler.adapter = CardAdapter(it.dataFromDb,::delete,::update,::copy)
                 }
@@ -62,22 +70,6 @@ open class MainFragment : Fragment(R.layout.fragment_main) {
         viewModel.update(data)
     }
 
-    @Deprecated("Deprecated in Java")
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.options_menu,menu)
-        super.onCreateOptionsMenu(menu, inflater)
-
-    }
-
-    @Deprecated("Deprecated in Java")
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.settings ->{
-                findNavController().navigate(R.id.action_mainFragment_to_settings2)
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
     private fun setRecyclerViewScrollListener() {
         scrollListener = object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
