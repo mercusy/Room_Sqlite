@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_mainFragment_to_addFragment"
             app:destination="@id/addFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_settings2"
+            app:destination="@id/settings2" />
     </fragment>
     <fragment
         android:id="@+id/addFragment"
@@ -21,6 +24,15 @@
         tools:layout="@layout/fragment_add" >
         <action
             android:id="@+id/action_addFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settings2"
+        android:name="com.example.roomsqlite3.fragments.Settings"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settings2_to_mainFragment"
             app:destination="@id/mainFragment" />
     </fragment>
 </navigation>

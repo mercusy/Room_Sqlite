@@ -29,16 +29,17 @@
 
             <EditText
                 android:id="@+id/title"
-                android:paddingHorizontal="15dp"
-                android:paddingVertical="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:minWidth="100dp"
                 android:background="@drawable/more"
                 android:hint="@string/titleadd"
-                android:textColorHint="@color/white"
+                android:maxWidth="300dp"
+                android:minWidth="100dp"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="10dp"
                 android:textColor="@color/white"
+                android:textColorHint="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -80,7 +81,7 @@
                     android:layout_margin="9dp"
                     android:background="#00FFFFFF"
                     android:src="@drawable/baseline_close_24"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@+id/message"
                     app:layout_constraintEnd_toEndOf="@+id/message" />
             </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,15 +3,19 @@ package com.example.roomsqlite3.fragments
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.example.roomsqlite3.R
 import com.example.roomsqlite3.databinding.FragmentAddBinding
 import com.example.roomsqlite3.roomDataBase.Data
 import com.example.roomsqlite3.roomDataBase.RoomDBViewModel
+import com.google.android.material.textfield.TextInputEditText
 import kotlin.math.absoluteValue
 
 class AddFragment : Fragment(R.layout.fragment_add) {
@@ -75,6 +79,14 @@ class AddFragment : Fragment(R.layout.fragment_add) {
         binding.delAll.setOnClickListener {
             binding.message.text.clear()
         }
+        binding.message.addTextChangedListener {
+            if (binding.message.text.isNotEmpty()){
+                binding.delAll.visibility = View.VISIBLE
+            }else{
+                binding.delAll.visibility = View.GONE
+            }
+        }
 
     }
+
 }

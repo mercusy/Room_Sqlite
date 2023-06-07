@@ -1,5 +1,8 @@
 package com.example.roomsqlite3.fragments
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.view.*
@@ -15,7 +18,7 @@ import com.example.roomsqlite3.roomDataBase.Data
 import com.example.roomsqlite3.roomDataBase.LiveData
 import com.example.roomsqlite3.roomDataBase.RoomDBViewModel
 
-class MainFragment : Fragment(R.layout.fragment_main) {
+open class MainFragment : Fragment(R.layout.fragment_main) {
 
     private lateinit var binding: FragmentMainBinding
     private val viewModel : RoomDBViewModel by viewModels()
@@ -44,13 +47,14 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                         setRecyclerViewScrollListener()
                         binding.addFrag.visibility = View.GONE
                     }
-                    binding.recycler.adapter = CardAdapter(it.dataFromDb,::delete,::update)
+                    binding.recycler.adapter = CardAdapter(it.dataFromDb,::delete,::update,::copy)
                 }
                 is LiveData.Nothing ->{}
                 else -> {}
             }
         }
     }
+
     private fun delete(data: Data){
        viewModel.delete(data)
     }
@@ -58,17 +62,18 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         viewModel.update(data)
     }
 
-
+    @Deprecated("Deprecated in Java")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.options_menu,menu)
         super.onCreateOptionsMenu(menu, inflater)
 
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.settings ->{
-
+                findNavController().navigate(R.id.action_mainFragment_to_settings2)
             }
         }
         return super.onOptionsItemSelected(item)
@@ -84,5 +89,10 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             }
         }
         binding.recycler.addOnScrollListener(scrollListener)
+    }
+    private fun copy(data: Data){
+        val clipboard = requireActivity().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clip = ClipData.newPlainText("",data.message)
+        clipboard.setPrimaryClip(clip)
     }
 }

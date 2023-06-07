@@ -4,15 +4,24 @@ import android.view.*
 import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.roomsqlite3.R
+import com.example.roomsqlite3.databinding.FragmentMainBinding
 import com.example.roomsqlite3.roomDataBase.Data
+import com.example.roomsqlite3.roomDataBase.RoomDBViewModel
 import kotlin.math.absoluteValue
+
 
 class CardHolder(view: View): ViewHolder(view)
 
-class CardAdapter(private val items: List<Data>,private val del: (data: Data)->Unit,private val update: (data: Data)->Unit) : Adapter<CardHolder>() {
+class CardAdapter(
+    private val items: List<Data>,
+    private val del: (data: Data)->Unit,
+    private val update: (data: Data)->Unit,
+    private val copy: (data: Data)-> Unit
+) : Adapter<CardHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.card,parent,false)
         return CardHolder(view)
@@ -93,11 +102,14 @@ class CardAdapter(private val items: List<Data>,private val del: (data: Data)->U
                     R.id.delete -> {del(itemD)
                     return@setOnMenuItemClickListener true}
                     R.id.share -> {
+                        copy(itemD)
                         return@setOnMenuItemClickListener true
                     }
+                    R.id.edit ->{
 
-                    else -> {return@setOnMenuItemClickListener false}
-
+                        return@setOnMenuItemClickListener true
+                    }
+                    else -> { return@setOnMenuItemClickListener false }
                 }
             }
             popup.show()

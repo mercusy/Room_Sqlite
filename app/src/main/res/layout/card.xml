@@ -27,7 +27,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:minWidth="100dp"
-            android:text="Hello"
+            android:text="Title"
+            android:maxWidth="290dp"
             android:background="@drawable/more"
             android:textColor="@color/white"
             android:textSize="20sp"
@@ -46,17 +47,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/Rtitle">
 
-            <EditText
+            <TextView
                 android:id="@+id/Rmessage"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/more"
                 android:gravity="fill_horizontal"
-                android:hint="@string/messageadd"
-                android:maxHeight="200dp"
                 android:paddingVertical="10dp"
                 android:paddingStart="15dp"
                 android:paddingEnd="30dp"
+                android:text="Message"
                 android:textColor="@color/white"
                 android:textColorHint="@color/white"
                 android:textSize="17sp"
